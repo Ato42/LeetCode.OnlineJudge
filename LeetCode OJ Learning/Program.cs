@@ -15,18 +15,17 @@ namespace LeetCode_OJ_Learning
 
         static public void mainstram()
         {
-            string output = "请输入数字，以进入程序：\r\n1:Two Sum;\r\n";
+            string output = "请输入数字，以进入程序：\r\n1:Two Sum;";
             string input;
             Console.WriteLine(output);
             try
             {
                 input = Console.ReadLine().ToString();
-                Console.WriteLine(input);
+               // Console.WriteLine(input);
                 switch(input)
                 {
                     case "1":
                         Two_Sum twosum = new Two_Sum();
-                        twosum.Run();
                         break;
                     default:
                         Console.WriteLine("输入错误，请重新输入。\r\n\r\n");

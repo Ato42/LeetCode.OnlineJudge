@@ -7,41 +7,38 @@ using System.Diagnostics;
 
 namespace LeetCode_OJ_Learning
 {
-    public delegate void FunctionDelegate(int[] array,int target);//用委托将算法作为参数传递
+    //public delegate void FunctionDelegate(int[] array,int target);//用委托将算法作为参数传递
     class Two_Sum
     {
+        private int[] arr=new int[] { 0};//数组
+        private int tar=0;//目标
+        /// <summary>
+        /// 构造函数，算法具体执行
+        /// </summary>
         public Two_Sum()
         {
-            GetArray();
-        }
-
-        /// <summary>
-        /// 检测某一算法时间消耗
-        /// </summary>
-        /// <param name="Function">指定算法</param>
-        private void TimeCost(FunctionDelegate Function)
-        {
-            Console.WriteLine("请输入数组中的数字，数字间以空格分隔，以回车结束：\r\n");
-           int[] arr= GetArray();
+            Console.WriteLine("请输入数组内数字，数字间以空格分隔：");
+            arr=GetArray();
             Console.WriteLine("请输入一个数字，作为targe");
-            int tar = GetTarget();
-            Stopwatch sw = new Stopwatch();
-            sw.Start(); //监视算法耗时
-            Function(arr,tar);
-            sw.Stop();
-            TimeSpan tp = sw.Elapsed;
-            double ms = tp.TotalMilliseconds;
-            Console.WriteLine("该算法耗时"+ms.ToString()+"ms\r\n");
-        }
+            tar=GetTarget();
+            try
+            {
+                RuntimeDetect rd = new RuntimeDetect(twoSum);
 
-        /// <summary>
-        /// 验证引用成功
-        /// </summary>
-        public void print()
-        {
-            Console.WriteLine("这里是 Two Sum\r\n");
-            Program.mainstram();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
+        ///// <summary>
+        ///// 验证引用成功
+        ///// </summary>
+        //public void print()
+        //{
+        //    Console.WriteLine("这里是 Two Sum\r\n");
+        //    Program.mainstram();
+        //}
 
         /// <summary>
         /// 获取数组
@@ -53,10 +50,10 @@ namespace LeetCode_OJ_Learning
             char[] s = new char[] { ' ' };
             int[] input=new int[1];
             try
-            {          
-            string[] arr = Console.ReadLine().Split(s);
-            int[] arry1 = new int[arr.Length];
-            arry1 = Array.ConvertAll<string, int>(arr, m => int.Parse(m));
+            {  
+            string[] arr = Console.ReadLine().Trim().Split(s);
+            input = new int[arr.Length];
+            input = Array.ConvertAll<string, int>(arr, m => int.Parse(m));
             }
             catch
             {
@@ -72,7 +69,7 @@ namespace LeetCode_OJ_Learning
         /// <returns></returns>
         private int GetTarget()
         {
-            Console.WriteLine("请输入一个数字，作为targe");
+
             int input=0;
             try
             {
@@ -85,6 +82,26 @@ namespace LeetCode_OJ_Learning
                 input = GetTarget();
             }
             return input;
+        }
+
+        /// <summary>
+        /// 算法1
+        /// </summary>
+        /// <returns></returns>
+        private int[] twoSum()
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[j] == tar - arr[i])
+                    {
+                        Console.WriteLine("结果是：[" + i.ToString() + "," + j.ToString() + "]");
+                        return new int[] { i, j };
+                    }
+                }
+            }
+            throw new Exception("无解");
         }
 
     }
