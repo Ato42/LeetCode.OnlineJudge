@@ -24,6 +24,11 @@ namespace LeetCode_OJ_Learning
             try
             {
                 RuntimeDetect rd = new RuntimeDetect(twoSum);
+                int[] result = twoSum();
+                Console.WriteLine("答案为：["+result[0].ToString()+","+result[1].ToString()+"]");
+                rd = new RuntimeDetect(hashtable);
+                result = hashtable();
+                Console.WriteLine("答案为：[" + result[0].ToString() + "," + result[1].ToString() + "]");
 
             }
             catch(Exception e)
@@ -52,8 +57,14 @@ namespace LeetCode_OJ_Learning
             try
             {  
             string[] arr = Console.ReadLine().Trim().Split(s);
+               
             input = new int[arr.Length];
             input = Array.ConvertAll<string, int>(arr, m => int.Parse(m));
+                if (arr.Length<2)
+                {
+                    Console.WriteLine("输入的数组长度最小为2，请重新输入：");
+                    input = GetArray();
+                }
             }
             catch
             {
@@ -90,18 +101,47 @@ namespace LeetCode_OJ_Learning
         /// <returns></returns>
         private int[] twoSum()
         {
-            for (int i = 0; i < arr.Length; i++)
+            int[] array = arr;
+            int target = tar;
+            for (int i = 0; i < array.Length; i++)
             {
-                for (int j = i + 1; j < arr.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    if (arr[j] == tar - arr[i])
+                    if (array[j] == target - array[i])
                     {
-                        Console.WriteLine("结果是：[" + i.ToString() + "," + j.ToString() + "]");
+                       // Console.WriteLine("结果是：[" + i.ToString() + "," + j.ToString() + "]");
                         return new int[] { i, j };
                     }
                 }
             }
             throw new Exception("无解");
+        }
+
+        private int[] hashtable()
+        {
+            int[] array = arr;
+            int target = tar;
+            Dictionary<int, int> hashtable=new Dictionary<int, int>();
+            for(int i=0;i<array.Length;i++)
+            {
+                if(!hashtable.ContainsKey(array[i]))
+                {
+                    hashtable.Add(array[i],i);
+                }
+                else if(array[i]*2==target)
+                {
+                    return new int[] { hashtable[array[i]], i };
+                }
+            }
+            for(int i=0;i<array.Length;i++)
+            {
+                int diff = target - array[i];
+                if(hashtable.ContainsKey(diff)&&i!=hashtable[diff])
+                {
+                    return new int[] { i, hashtable[diff] };
+                }
+            }
+            throw new Exception("未找到该解！");          
         }
 
     }
