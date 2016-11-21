@@ -22,6 +22,9 @@ namespace LeetCode_OJ_Learning
             RuntimeDetect rd = new RuntimeDetect(TwoSum);
             int[] result = TwoSum();
             Console.WriteLine("解为[{0},{1}]",result[0],result[1]);
+            rd = new RuntimeDetect(TwoSumB);
+            result = TwoSumB();
+            Console.WriteLine("解为[{0},{1}]", result[0], result[1]);
         }
         /// <summary>
         /// 从键盘输入有序数组
@@ -97,6 +100,34 @@ namespace LeetCode_OJ_Learning
                 }
             }
             throw new Exception("无解");
+        }
+        private int[] TwoSumB()
+        {
+            int[] array = arr;
+            int target = tar;
+
+            for(int i=0;i<array.Length;i++)
+            {
+                int s = i+1, e = array.Length - 1;
+                int diff = target - array[i];
+                while(s<e)
+                {
+                    int m = (s + e) / 2;
+                    if(array[m]<diff)
+                    {
+                        s = m + 1;
+                    }
+                    else
+                    {
+                        e = m;
+                    }
+                }
+                if(s==e&&array[s]==diff)
+                {
+                    return new int[] {i,s };
+                }
+            }
+            throw new Exception("误解");
         }
     }
 }
