@@ -19,6 +19,7 @@ namespace LeetCode_OJ_Learning
             arr = GetArray();
             Console.WriteLine("请输入目标");
             tar = GetTarget();
+            RuntimeDetect rd = new RuntimeDetect(TwoSum);
             int[] result = TwoSum();
             Console.WriteLine("解为[{0},{1}]",result[0],result[1]);
         }
