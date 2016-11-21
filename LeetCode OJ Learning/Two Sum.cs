@@ -117,6 +117,10 @@ namespace LeetCode_OJ_Learning
             throw new Exception("无解");
         }
 
+        /// <summary>
+        /// 使用Dictionary键值对，查找值对应的序号
+        /// </summary>
+        /// <returns></returns>
         private int[] hashtable()
         {
             int[] array = arr;
