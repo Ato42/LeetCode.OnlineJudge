@@ -29,7 +29,10 @@ namespace LeetCode_OJ_Learning
                         break;
                     case "2":
                         TwoSum_Sorted tss = new TwoSum_Sorted();
-                        break;                        
+                        break;
+                    case "3":
+                        Two_Sum_DSD dsd = new Two_Sum_DSD();
+                        break;
                     default:
                         Console.WriteLine("输入错误，请重新输入。\r\n\r\n");
                         mainstram();

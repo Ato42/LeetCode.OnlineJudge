@@ -48,6 +48,7 @@
     <Compile Include="RuntimeDetect.cs" />
     <Compile Include="Two Sum.cs" />
     <Compile Include="TwoSum_Sorted.cs" />
+    <Compile Include="Two_Sum_DSD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
